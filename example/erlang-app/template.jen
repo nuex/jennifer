@@ -1,0 +1,14 @@
+;
+; Jennifer template for an Erlang OTP Application
+;
+
+name erlang-app
+description A template for generating an Erlang OTP Application
+
+var appid myapp
+var description
+template erlang-app/rebar.config rebar.config
+dir apps/{{appid}}/src
+template erlang-app/app.app.src apps/{{appid}}/src/{{appid}}.app.src
+template erlang-app/app_app.erl apps/{{appid}}/src/{{appid}}.erl
+template erlang-app/app_sup.erl apps/{{appid}}/src/{{appid}}_sup.erl

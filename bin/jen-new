@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# jen-new: Generate code from a jennifer template
+#
+
+. jen-internal
+
+_jen_varlist=""
+
+_jen_new_usage() {
+  echo 'usage: jen new <template> [-v var="val"]'
+  exit 0
+}
+
+_jen_new() {
+  template="$1"; shift
+
+  [ ! "$template" ] && _jen_new_usage
+
+  # Show an error if the template does not exist
+  [ ! -d "$__jen_template_dir/$template" ] &&
+    __jen_error "Template \"$template\" not found"
+
+  while getopts ":v:" opt; do
+    case "$opt" in
+      v) _jen_add_to_varlist "$OPTARG" ;;
+    esac
+  done
+
+  echo "$_jen_varlist" |
+    awk -f "$__jen_awklib_dir/jen-build.awk" \
+        -v template_dir="$__jen_template_dir/$template" \
+          - "$__jen_template_dir/$template/template.jen"
+}
+
+_jen_add_to_varlist() {
+  vars="$@"
+  if [ "$_jen_varlist" ]; then
+    _jen_varlist="$_jen_varlist,$vars"
+  else
+    _jen_varlist="$vars"
+  fi
+}
+
+_jen_new "$@"

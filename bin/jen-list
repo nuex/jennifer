@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# jen-list: List installed templates
+#
+
+. jen-internal
+
+_jen_list() {
+  templates="$(find "$__jen_template_dir" -maxdepth 1 | sed "s#$__jen_template_dir##")"
+
+  # If there are no templates, exit with an error
+  [ ! "$templates" ] && echo "No templates installed." && exit 0
+
+  awk -f "$__jen_awklib_dir/jen-validate.awk" \
+      -f "$__jen_awklib_dir/jen-list.awk" $__jen_template_dir/*/template.jen
+}
+
+_jen_list "$@"

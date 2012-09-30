@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# jen-delete: Deletes a template
+#
+
+. jen-internal
+
+_jen_delete_usage() {
+  echo 'usage: jen delete <template>'
+  exit 0
+}
+
+_jen_delete() {
+  template="$1"; shift;
+
+  [ ! "$template" ] && _jen_delete_usage
+  [ ! -d "$__jen_template_dir/$template" ] && __jen_error "Template not found"
+
+  rm -rf "$__jen_template_dir/$template"
+}
+
+_jen_delete "$@"

@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# jennifer - a project generation tool
+# Copyright (c) 2012 Chase Allen James <nx-jennifer@nu-ex.com>
+#
+
+_jen_usage() {
+  echo 'usage: jen <command> [<args>]
+
+Commands:
+  add     Add a template
+  list    Show a list of installed templates
+  delete  Delete an installed template
+  new     Generate code from a template
+' 
+  exit 0
+}
+
+cmd="$1"; shift;
+
+case "$cmd" in
+  add) jen-add "$@" ;;
+  list) jen-list "$@" ;;
+  delete) jen-delete "$@" ;;
+  new) jen-new "$@" ;;
+  *) _jen_usage ;;
+esac
