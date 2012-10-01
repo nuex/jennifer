@@ -59,9 +59,11 @@ Jennifer templates use mustache notation for tags. Tags get replaced with data e
 
 ## INSTALLATION
 
-A simple install script hasn't been written yet. Until then:
+Installing jennifer includes cloning the git repository, running make and exporting the jennifer lib directory:
 
     git clone git://github.com/nuex/jennifer.git
     cd jennifer
-    export PATH="$PATH:$(pwd)/bin"
-    export JEN_LIBDIR="$(pwd)/lib"
+    sudo make install
+    export JEN_LIBDIR="/usr/local/jennifer/lib"
+
+You can edit config.mk to change the install path. You'll need to update the JEN_LIBDIR path as well, of course.
