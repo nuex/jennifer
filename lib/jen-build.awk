@@ -1,3 +1,8 @@
+# jen-build.awk
+#
+# Generate a project skeleton from a jennifer template
+#
+
 # Ignore blank lines and comments
 NF == 0 || $0 ~ /^;/ { next }
 
@@ -9,7 +14,7 @@ FILENAME == "-" {
 
 { scrub_comments() }
 
-# Add a var
+# var command
 /^var / {
   k = $2
   v = ""
@@ -30,11 +35,20 @@ FILENAME == "-" {
   next
 }
 
+# dir command
 /^dir / {
   dir = bind_data($2)
   system("mkdir -p " dir)
 }
 
+# cp command
+/^cp / {
+  src = $2
+  dst = bind_data($3)
+  system("cp " template_dir "/" src " " dst)
+}
+
+# template command
 /^template / {
   src = template_dir "/" $2
   destination = bind_data($3)

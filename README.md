@@ -56,6 +56,7 @@ Jennifer templates use mustache notation for tags. Tags get replaced with data e
 * var - _var_ is used to either set default variable data or reference any variables used in the template.
 * dir - _dir_ creates a directory
 * template - _template_ has two arguments. The first argument is the source template, the second is the destination location.
+* cp - _cp_ also has two arguments. The first argument is the source file, the second is the destination location.
 
 ## INSTALLATION
 
