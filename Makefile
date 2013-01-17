@@ -5,6 +5,7 @@ install:
 	@mkdir -p ${PREFIX}/bin
 	@cp bin/jen ${PREFIX}/bin
 	@cp bin/jen-add ${PREFIX}/bin
+	@cp bin/jen-update ${PREFIX}/bin
 	@cp bin/jen-delete ${PREFIX}/bin
 	@cp bin/jen-internal ${PREFIX}/bin
 	@cp bin/jen-list ${PREFIX}/bin
@@ -20,6 +21,7 @@ uninstall:
 	@echo Uninstalling jennifer files
 	@rm ${PREFIX}/bin/jen
 	@rm ${PREFIX}/bin/jen-add
+	@rm ${PREFIX}/bin/jen-update
 	@rm ${PREFIX}/bin/jen-delete
 	@rm ${PREFIX}/bin/jen-internal
 	@rm ${PREFIX}/bin/jen-list

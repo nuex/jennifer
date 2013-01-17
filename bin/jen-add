@@ -15,20 +15,10 @@ _jen_add() {
 
   [ ! "$dir" ] && _jen_add_usage
 
-  # Ensure the template we're copying exists
-  [ ! -d "$dir" ] && __jen_error "Target directory does not exist"
-
-  # Ensure jennifer template dir exists
-  [ ! -d "$__jen_template_dir" ] && mkdir "$__jen_template_dir"
-
-  # Ensure template.jen exists
-  [ ! -f "$dir/template.jen" ] && __jen_error "template.jen file not found"
-
-  # Extract the name from the template file
-  name="$(grep '^name ' "$dir/template.jen" | sed 's/name //')"
-
-  # If no name was found, exit with an error
-  [ ! "$name" ] && __jen_error "template name not found"
+  __jen_ensure_directory "$dir"
+  __jen_ensure_template
+  __jen_ensure_template_file "$dir"
+  name="$(__jen_template_name "$dir")"
 
   # If the template has already been added, let the user know
   [ -d "$__jen_template_dir/$name" ] && __jen_error "This template has already been added. To remove it, use \"jen delete $name\"."

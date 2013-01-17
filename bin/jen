@@ -9,6 +9,7 @@ _jen_usage() {
 
 Commands:
   add     Add a template
+  update  Update an installed template
   list    Show a list of installed templates
   delete  Delete an installed template
   new     Generate code from a template
@@ -23,5 +24,6 @@ case "$cmd" in
   list) jen-list "$@" ;;
   delete) jen-delete "$@" ;;
   new) jen-new "$@" ;;
+  update) jen-update "$@" ;;
   *) _jen_usage ;;
 esac

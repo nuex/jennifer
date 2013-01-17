@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# jen-update: Update a template
+#
+
+. jen-internal
+
+_jen_update_usage() {
+  echo 'usage: jen update <directory>'
+  exit 0
+}
+
+_jen_update() {
+  dir="$1"; shift
+
+  [ ! "$dir" ] && _jen_update_usage
+
+  __jen_ensure_directory "$dir"
+  __jen_ensure_template
+  __jen_ensure_template_file "$dir"
+  name="$(__jen_template_name "$dir")"
+
+  # If the template doesn't exist, let the user know
+  [ ! -d "$__jen_template_dir/$name" ] && __jen_error "This template doesn't exist. Use \"jen add $name\" to add the template."
+
+  # Delete the current template
+  jen delete "$name"
+
+  # Add the template
+  jen add "$dir"
+}
+
+_jen_update "$@"
