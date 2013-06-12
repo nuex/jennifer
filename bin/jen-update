@@ -21,7 +21,7 @@ _jen_update() {
   name="$(__jen_template_name "$dir")"
 
   # If the template doesn't exist, let the user know
-  [ ! -d "$__jen_template_dir/$name" ] && __jen_error "This template doesn't exist. Use \"jen add $name\" to add the template."
+  [ ! -d "$__jen_template_dir/$name" ] && __jen_error "This template doesn't exist. Use \"jen add <directory>\" to add the template."
 
   # Delete the current template
   jen delete "$name"
