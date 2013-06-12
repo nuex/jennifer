@@ -1,0 +1,4 @@
+name unicorn-init
+description generates a unicorn init script
+var app
+template unicorn unicorn_{{app}}
