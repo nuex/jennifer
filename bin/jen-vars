@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# jen-vars: Get the variables available for a template
+#
+
+. jen-internal
+
+_jen_vars_usage() {
+  echo 'usage: jen vars <template>'
+  exit 0
+}
+
+_jen_vars() {
+  template="$1"; shift;
+
+  [ ! "$template" ] && _jen_vars_usage
+  __jen_check_template "$template"
+
+  awk -f "$__jen_awklib_dir/jen-vars.awk" "$__jen_template_dir/$template/template.jen"
+}
+
+_jen_vars "$@"

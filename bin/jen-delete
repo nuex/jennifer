@@ -14,7 +14,7 @@ _jen_delete() {
   template="$1"; shift;
 
   [ ! "$template" ] && _jen_delete_usage
-  [ ! -d "$__jen_template_dir/$template" ] && __jen_error "Template not found"
+  __jen_check_template "$template"
 
   rm -rf "$__jen_template_dir/$template"
 }

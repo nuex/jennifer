@@ -30,6 +30,10 @@ You can also pass custom data to be bound to the template:
 
     jen new mytemplate -v author="Trevor Goodchild" -v city="Bregna"
 
+If you need to see what variables are available, use the `vars` command:
+
+    jen vars mytemplate
+
 The template.jen file is a text file with a list of instructions:
 
     ;

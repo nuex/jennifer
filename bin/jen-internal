@@ -34,6 +34,12 @@ __jen_template_name() {
   echo "$name"
 }
 
+# Show an error if the template doesn't exist
+__jen_check_template() {
+  template="$1"; shift
+  [ ! -d "$__jen_template_dir/$template" ] && { __jen_error "Template not found"; }
+}
+
 __jen_error() {
   echo -e ">>> ERROR: $*" >&2
   exit 1

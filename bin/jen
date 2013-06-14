@@ -25,5 +25,6 @@ case "$cmd" in
   delete) jen-delete "$@" ;;
   new) jen-new "$@" ;;
   update) jen-update "$@" ;;
+  vars) jen-vars "$@" ;;
   *) _jen_usage ;;
 esac
