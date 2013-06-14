@@ -20,6 +20,7 @@ install:
 	@cp lib/jen-list.awk ${AWKLIB}
 	@cp lib/jen-validate.awk ${AWKLIB}
 	@cp lib/jen-vars.awk ${AWKLIB}
+	@cp lib/jen-internal.awk ${AWKLIB}
 	@echo Installation Complete
 
 uninstall:

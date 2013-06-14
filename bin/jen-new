@@ -28,7 +28,8 @@ _jen_new() {
   done
 
   echo "$_jen_varlist" |
-    awk -f "$__jen_awklib_dir/jen-build.awk" \
+    awk -f "$__jen_awklib_dir/jen-internal.awk" \
+        -f "$__jen_awklib_dir/jen-build.awk" \
         -v template_dir="$__jen_template_dir/$template" \
           - "$__jen_template_dir/$template/template.jen"
 }

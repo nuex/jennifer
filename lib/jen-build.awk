@@ -3,16 +3,11 @@
 # Generate a project skeleton from a jennifer template
 #
 
-# Ignore blank lines and comments
-NF == 0 || $0 ~ /^;/ { next }
-
 # Parse passed in vars
 FILENAME == "-" {
   set_custom_data($0)
   next
 }
-
-{ scrub_comments() }
 
 # var command
 /^var / {
@@ -25,50 +20,23 @@ FILENAME == "-" {
       v = $i
     }
   }
-  data[k] = v
 
   # If there was custom data set with this key,
   # overwrite the template version
-  if (custom_data[k]) {
-    data[k] = custom_data[k]
-  }
+  if (custom_data[k]) v = custom_data[k]
+
+  data[k] = v
   next
 }
 
-# dir command
-/^dir / {
-  dir = bind_data($2)
-  system("mkdir -p " dir)
+# collect commands
+/^(dir|cp|template)/ {
+  commands[command_cnt++] = $0
 }
 
-# cp command
-/^cp / {
-  src = $2
-  dst = bind_data($3)
-  system("cp " template_dir "/" src " " dst)
-}
-
-# template command
-/^template / {
-  src = template_dir "/" $2
-  destination = bind_data($3)
-
-  # Pull each line out of the file and bind
-  # data to any template tags
-  rendered = ""
-  while ((getline line < src) > 0) {
-    if (rendered) {
-      rendered = rendered "\n" bind_data(line)
-    } else {
-      rendered = bind_data(line)
-    }
-  }
-  close(src)
-
-  # Pipe rendered text to the destination file
-  print rendered > destination
-
-  next
+END {
+  bind_vars()
+  build()
 }
 
 # Bind data to a text string template
@@ -81,6 +49,13 @@ function bind_data(s,   tag, key) {
     return bind_data(s, data)
   } else {
     return s
+  }
+}
+
+# Bind data to tags in vars
+function bind_vars() {
+  for (k in data) {
+    data[k] = bind_data(data[k])
   }
 }
 
@@ -107,4 +82,55 @@ function set_custom_data(vars) {
     split(pairs[i], kv, "=")
     custom_data[kv[1]] = kv[2]
   }
+}
+
+# Generate the project
+function build() {
+  for (idx in commands) {
+    $0 = commands[idx]
+    if ($0 ~ /^dir/) run_dir()
+    if ($0 ~ /^cp/) run_cp()
+    if ($0 ~ /^template/) run_template()
+  }
+}
+
+# Create a directory
+function run_dir() {
+  dir = bind_data($2)
+  system("mkdir -p " dir)
+}
+
+# Copy a file
+function run_cp() {
+  src = $2
+  dst = bind_data($3)
+  system("cp " template_dir "/" src " " dst)
+}
+
+# Create a template
+function run_template() {
+  src = template_dir "/" $2
+  destination = bind_data($3)
+
+  # Pull each line out of the file and bind
+  # data to any template tags
+  rendered = read_file(src)
+  close(src)
+
+  # Pipe rendered text to the destination file
+  print rendered > destination
+}
+
+# Read a file and return the data
+function read_file(file,      rendered, line, rendered_line) {
+  rendered = ""
+  while ((getline line < file) > 0) {
+    rendered_line = bind_data(line)
+    if (length(rendered) > 0) {
+      rendered = rendered "\n" rendered_line
+    } else {
+      rendered = rendered_line
+    }
+  }
+  return rendered
 }
