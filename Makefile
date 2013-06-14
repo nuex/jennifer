@@ -1,5 +1,8 @@
 include config.mk
 
+all:
+	@echo Run make install to install
+
 install:
 	@echo Installing jennifer executables to ${PREFIX}/bin
 	@mkdir -p ${PREFIX}/bin
