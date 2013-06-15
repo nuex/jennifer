@@ -46,7 +46,7 @@ function bind_data(s,   tag, key) {
     match(tag, /([[:alnum:]_]|[?]).*[^}]/)
     key = substr(tag, RSTART, RLENGTH)
     gsub(tag, data[key], s)
-    return bind_data(s, data)
+    return bind_data(s)
   } else {
     return s
   }
