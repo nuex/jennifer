@@ -11,17 +11,18 @@
 ### END INIT INFO
 
 APP={{app}}
-PATH=/usr/local/rbenv/bin:/usr/local/rbenv/shims:$PATH
-DAEMON=unicorn_rails
-APPDIR=/var/app/$APP
-DAEMON_OPTS="-c $APPDIR/current/config/unicorn.rb -E production -D"
-NAME=unicorn_rails
-DESC="Unicorn app for $APP"
-PID=$APPDIR/pids/unicorn.pid
+HOST={{host}}
+PORT={{port}}
+DAEMON=unicorn
+APPDIR={{app_dir}}
+DAEMON_OPTS="-c {{config}} -E production -D -l {{host}}:{{port}}"
+NAME="unicorn_$APP"
+DESC="Unicorn for $APP"
+PID={{pid}}
 
 case "$1" in
   start)
-        CD_TO_APP_DIR="cd $APPDIR/current"
+        CD_TO_APP_DIR="cd $APPDIR"
         START_DAEMON_PROCESS="bundle exec $DAEMON $DAEMON_OPTS"
 
         echo -n "Starting $DESC: "

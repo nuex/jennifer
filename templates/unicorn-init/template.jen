@@ -1,4 +1,9 @@
 name unicorn-init
-description generates a unicorn init script
+description generates a unicorn init script for a rack app
 var app
+var app_dir /var/app/{{app}}/current
+var config {{app_dir}}/config/unicorn.rb
+var pid {{app_dir}}/pids/unicorn_{{app}}.pid
+var host localhost
+var port 3001
 template unicorn unicorn_{{app}}
