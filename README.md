@@ -6,7 +6,7 @@ jennifer
 Jennifer is used to quickly build and store project templates. A jennifer template looks like this:
 
     some_directory/
-      template.jen
+      Jenfile
       my.code
       another.code
 
@@ -34,7 +34,7 @@ If you need to see what variables are available, use the `vars` command:
 
     jen vars mytemplate
 
-The template.jen file is a text file with a list of instructions:
+The Jenfile is a text file with a list of instructions:
 
     ;
     ; Jennifer template for an Erlang OTP Application

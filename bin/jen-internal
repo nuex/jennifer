@@ -14,10 +14,10 @@ __jen_ensure_template() {
   [ ! -d "$__jen_template_dir" ] && mkdir "$__jen_template_dir"
 }
 
-# Ensure template.jen exists
+# Ensure Jenfile exists
 __jen_ensure_template_file() {
   dir="$1"; shift
-  [ ! -f "$dir/template.jen" ] && __jen_error "template.jen file not found"
+  [ ! -f "$dir/Jenfile" ] && __jen_error "Jenfile not found"
 }
 
 # Get the template name
@@ -26,7 +26,7 @@ __jen_template_name() {
   dir="$1"; shift
 
   # Extract the name from the template file
-  name="$(grep '^name ' "$dir/template.jen" | sed 's/name //')"
+  name="$(grep '^name ' "$dir/Jenfile" | sed 's/name //')"
 
   # If no name was found, exit with an error
   [ ! "$name" ] && __jen_error "template name not found"

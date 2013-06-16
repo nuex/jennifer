@@ -31,7 +31,7 @@ _jen_new() {
     awk -f "$__jen_awklib_dir/jen-internal.awk" \
         -f "$__jen_awklib_dir/jen-build.awk" \
         -v template_dir="$__jen_template_dir/$template" \
-          - "$__jen_template_dir/$template/template.jen"
+          - "$__jen_template_dir/$template/Jenfile"
 }
 
 _jen_add_to_varlist() {

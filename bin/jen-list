@@ -12,7 +12,7 @@ _jen_list() {
   [ ! "$templates" ] && echo "No templates installed." && exit 0
 
   awk -f "$__jen_awklib_dir/jen-validate.awk" \
-      -f "$__jen_awklib_dir/jen-list.awk" $__jen_template_dir/*/template.jen
+      -f "$__jen_awklib_dir/jen-list.awk" $__jen_template_dir/*/Jenfile
 }
 
 _jen_list "$@"
