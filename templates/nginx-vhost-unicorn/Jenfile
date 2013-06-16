@@ -1,0 +1,6 @@
+name nginx-vhost-unicorn
+description nginx unicorn vhost config
+var app example
+var app_dir /var/app/{{app}}/current
+var server_name example.dev
+template unicorn-nginx {{app}}
