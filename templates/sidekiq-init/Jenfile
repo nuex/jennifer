@@ -1,0 +1,10 @@
+name sidekiq-init
+description generates a sidekiq init script
+
+var app example
+var app_dir /var/app/{{app}}/current
+var log /var/log/sidekiq_{{app}}.log
+var lock /var/app/{{app}}/locks/sidekiq-{{app}}.lock
+var pid /var/app/{{app}}/pids/sidekiq-{{app}}.pid
+
+template sidekiq sidekiq_{{app}}
