@@ -46,8 +46,4 @@ __jen_error() {
 }
 
 __jen_template_dir="$HOME/.jen"
-
-[ ! "$JEN_LIBDIR" ] &&
-  __jen_error "Cannot find jennifer awk libraries. Please set \$JEN_LIBDIR."
-
-__jen_awklib_dir="$JEN_LIBDIR"
+__jen_awklib_dir="JEN_AWKLIB_PATH"

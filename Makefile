@@ -1,7 +1,10 @@
 include config.mk
 
 all:
-	@echo Run make install to install
+	@echo Compiling jennifer-internal executable
+	@sed "s#JEN_AWKLIB_PATH#${AWKLIB}#g" < bin/jen-internal.template > bin/jen-internal
+	@chmod 755 bin/jen-internal
+	@echo Compiled
 
 install:
 	@echo Installing jennifer executables to ${PREFIX}/bin

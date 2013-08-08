@@ -1,9 +1,28 @@
 jennifer
 ========
 
-## USAGE
+## Overview
 
-Jennifer is used to quickly build and store project templates. A jennifer template looks like this:
+Jennifer is a project scaffold generator. It uses common tools like sh and awk to quickly generate boilerplate code, configuration files or a directory structure.
+
+## Install
+
+To install:
+
+    git clone git://github.com/nuex/jennifer.git
+    cd jennifer
+    make
+    sudo make install
+
+Edit `config.mk` before running `make` if you want to customize the binary install directory (defaults to `/usr/local/bin`) and the awk library install directory (defaults to `/usr/local/lib/jennifer`).
+
+Add the binary install directory to your path (unless it is already in your path):
+
+    echo "export PATH=$PATH:/usr/local/bin" >> ~/.bash_profile    # (bash example)
+
+## Usage
+
+A jennifer template is simply a directory of files and directories that make up your project scaffold. A template could look like this:
 
     some_directory/
       Jenfile
@@ -22,7 +41,7 @@ Or delete them:
   
     jen delete mytemplate
 
-You generate templates with _jen new_:
+You generate a project from a stored template with _jen new_:
 
     jen new mytemplate
 
@@ -30,7 +49,7 @@ You can also pass custom data to be bound to the template:
 
     jen new mytemplate -v author="Trevor Goodchild" -v city="Bregna"
 
-If you need to see what variables are available, use the `vars` command:
+If you need to see what variables are available to bind data to, use the `vars` command:
 
     jen vars mytemplate
 
@@ -61,14 +80,3 @@ Jennifer templates use mustache notation for tags. Tags get replaced with data e
 * dir - _dir_ creates a directory
 * template - _template_ has two arguments. The first argument is the source template, the second is the destination location.
 * cp - _cp_ also has two arguments. The first argument is the source file, the second is the destination location.
-
-## INSTALLATION
-
-Installing jennifer includes cloning the git repository, running make and exporting the jennifer lib directory:
-
-    git clone git://github.com/nuex/jennifer.git
-    cd jennifer
-    sudo make install
-    export JEN_LIBDIR="/usr/local/jennifer/lib"
-
-You can edit config.mk to change the install path. You'll need to update the JEN_LIBDIR path as well, of course.
