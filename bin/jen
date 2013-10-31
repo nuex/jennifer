@@ -13,6 +13,7 @@ Commands:
   list    Show a list of installed templates
   delete  Delete an installed template
   new     Generate code from a template
+  vars    Show template variables
 ' 
   exit 0
 }
