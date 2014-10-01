@@ -1,9 +1,0 @@
-server {
-  listen 80;
-  server_name {{server_name}};
-
-  location / {
-    autoindex on;
-    alias {{root_dir}};
-  }
-}

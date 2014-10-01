@@ -1,6 +1,0 @@
-name nginx-vhost-static
-description nginx vhost for a static website
-var app
-var root_dir /var/app/{{app}}/current
-var server_name example.dev
-template nginx-static {{app}}
